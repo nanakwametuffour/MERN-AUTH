@@ -1,9 +1,15 @@
-import React from 'react'
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import Header from './components/Header'
 
 export default function App() {
   return (
-    <div className=' text-red-700'>
-      <h1>Hello World</h1>
-    </div>
+    <>
+     <BrowserRouter>
+       <Header/>
+       <Routes>
+
+       </Routes>
+     </BrowserRouter>
+    </>
   )
 }
