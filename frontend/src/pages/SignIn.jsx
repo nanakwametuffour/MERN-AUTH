@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
- import { useSelector, useDispatch } from "react-redux";
- import { signInStart, signInSuccess,signInFailure } from "../redux/user/userSlice";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  signInStart,
+  signInSuccess,
+  signInFailure,
+} from "../redux/user/userSlice";
 export default function SignIn() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({});
-   const {error, loading} = useSelector((state)=> state.user)
+  const { error, loading } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const handleChange = (e) => {
     setFormData({
@@ -17,7 +21,7 @@ export default function SignIn() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-     dispatch(signInStart())
+      dispatch(signInStart());
       const res = await fetch("/api/auth/signin", {
         method: "POST",
         headers: {
@@ -27,14 +31,13 @@ export default function SignIn() {
       });
       const data = await res.json();
       if (data.success === false) {
-         
-        dispatch(signInFailure(data.message))
+        dispatch(signInFailure(data.message));
         return;
       }
-      dispatch(signInSuccess(data))
+      dispatch(signInSuccess(data));
       navigate("/");
     } catch (error) {
-      dispatch(signInFailure(error.message))
+      dispatch(signInFailure(error.message));
     }
   };
 
@@ -44,7 +47,6 @@ export default function SignIn() {
         Sign in
       </h1>
       <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-      
         <input
           className="p-3 rounded-lg focus:outline-none border"
           type="email"
@@ -66,7 +68,7 @@ export default function SignIn() {
           {loading ? "loading..." : "sign in"}
         </button>
         <div className="flex gap-2">
-          <span>Have an account?</span>
+          <span>Dont have an account?</span>
           <Link to={"/sign-up"}>
             <span className="text-blue-800 font-semibold">Sign up</span>
           </Link>
