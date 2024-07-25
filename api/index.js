@@ -25,8 +25,8 @@ app.listen(5000, ()=>{
 })
 
 
-  app.use("/api/user", userRoute)
-  app.use("/api/auth", authRoute)
+  app.use("/api/user", userRoute);
+  app.use("/api/auth", authRoute);
 
 
 
